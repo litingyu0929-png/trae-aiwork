@@ -226,7 +226,7 @@ router.get('/board', async (req, res) => {
       .from('leave_applications')
       .select(`
         *,
-        profiles:user_id (full_name, email, avatar_url, role, department)
+        profiles:user_id (full_name, email, avatar_url, role)
       `)
       .eq('status', 'approved');
 
