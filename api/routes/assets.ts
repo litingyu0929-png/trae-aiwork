@@ -4,7 +4,6 @@ import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
 import { v4 as uuidv4 } from 'uuid';
-import sharp from 'sharp';
 
 const router = express.Router();
 
@@ -98,6 +97,7 @@ router.get('/', async (req: Request, res: Response) => {
 router.post('/upload', upload.array('files', 10), async (req: Request, res: Response): Promise<void> => {
   try {
     const supabase = getSupabaseClient();
+    const sharp = (await import('sharp')).default;
     const files = req.files as Express.Multer.File[];
     const { title, description, category, visibility, owner_id } = req.body;
 
