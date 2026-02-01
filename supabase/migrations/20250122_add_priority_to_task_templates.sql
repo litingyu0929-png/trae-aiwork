@@ -1,0 +1,2 @@
+ALTER TABLE task_templates 
+ADD COLUMN IF NOT EXISTS priority INTEGER DEFAULT 1;
