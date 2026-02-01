@@ -9,8 +9,8 @@ const router = express.Router();
  * Returns tasks and the account/persona mapping for the matrix view.
  */
 router.get('/today', async (req: Request, res: Response): Promise<void> => {
-  const supabase = getSupabaseClient();
   try {
+    const supabase = getSupabaseClient();
     const { staff_id, date } = req.query;
 
     if (!staff_id || !date) {
@@ -108,8 +108,8 @@ router.get('/today', async (req: Request, res: Response): Promise<void> => {
  * POST /api/runbook/generate-daily
  */
 router.post('/generate-daily', async (req: Request, res: Response): Promise<void> => {
-  const supabase = getSupabaseClient();
   try {
+    const supabase = getSupabaseClient();
     const { staff_id, date, role_type: explicitRoleType } = req.body; 
 
     if (!staff_id || !date) {

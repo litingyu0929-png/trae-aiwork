@@ -3,11 +3,11 @@ import { authenticateToken } from '../middlewares/authMiddleware.js';
 import getSupabaseClient from '../supabaseClient.js';
 
 const router = express.Router();
-const supabase = getSupabaseClient();
 
 // Get all logs (Admin only)
 router.get('/', authenticateToken, async (req: Request, res: Response) => {
   try {
+    const supabase = getSupabaseClient();
     const { page = 1, limit = 50 } = req.query;
     const from = (Number(page) - 1) * Number(limit);
     const to = from + Number(limit) - 1;

@@ -5,8 +5,8 @@ const router = express.Router();
 
 // GET /api/accounts - List all accounts
 router.get('/', async (req: Request, res: Response) => {
-  const supabase = getSupabaseClient();
   try {
+    const supabase = getSupabaseClient();
     const { data: accounts, error } = await supabase
       .from('accounts')
       .select(`
@@ -27,8 +27,8 @@ router.get('/', async (req: Request, res: Response) => {
 
 // GET /api/accounts/staff - List potential staff for assignment
 router.get('/staff', async (req: Request, res: Response) => {
-  const supabase = getSupabaseClient();
   try {
+    const supabase = getSupabaseClient();
     const { data: staff, error } = await supabase
       .from('profiles')
       .select('id, full_name, role, avatar_url')
@@ -45,8 +45,8 @@ router.get('/staff', async (req: Request, res: Response) => {
 
 // POST /api/accounts - Create new account
 router.post('/', async (req: Request, res: Response) => {
-  const supabase = getSupabaseClient();
   try {
+    const supabase = getSupabaseClient();
     const { platform, account_name, account_handle, status, assigned_to, persona_id, login_credentials } = req.body;
     
     // SYNC LOGIC: If persona_id is provided, assigned_to MUST match the persona's owner
@@ -116,8 +116,8 @@ router.post('/', async (req: Request, res: Response) => {
 
 // PUT /api/accounts/:id - Update account
 router.put('/:id', async (req: Request, res: Response) => {
-  const supabase = getSupabaseClient();
   try {
+    const supabase = getSupabaseClient();
     const { id } = req.params;
     const { platform, account_name, account_handle, status, assigned_to, persona_id, login_credentials } = req.body;
     
@@ -195,8 +195,8 @@ router.put('/:id', async (req: Request, res: Response) => {
 
 // POST /api/accounts/:id/bind - Bind persona to account (Bypass RLS)
 router.post('/:id/bind', async (req: Request, res: Response) => {
-  const supabase = getSupabaseClient();
   try {
+    const supabase = getSupabaseClient();
     const { id } = req.params;
     const { persona_id } = req.body;
 
@@ -225,8 +225,8 @@ router.post('/:id/bind', async (req: Request, res: Response) => {
 
 // DELETE /api/accounts/:id - Delete account
 router.delete('/:id', async (req: Request, res: Response) => {
-  const supabase = getSupabaseClient();
   try {
+    const supabase = getSupabaseClient();
     const { id } = req.params;
     
     const { error } = await supabase

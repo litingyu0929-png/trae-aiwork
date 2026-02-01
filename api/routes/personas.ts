@@ -5,8 +5,8 @@ const router = express.Router();
 
 // GET /api/personas - List all personas
 router.get('/', async (req: Request, res: Response) => {
-  const supabase = getSupabaseClient();
   try {
+    const supabase = getSupabaseClient();
     const { data: personas, error } = await supabase
       .from('personas')
       .select('*, staff_persona_assignments(staff_id, profiles(id, full_name, avatar_url)), accounts(id, platform, account_name, status)')
@@ -117,8 +117,8 @@ router.post('/', async (req: Request, res: Response) => {
 
 // PUT /api/personas/:id - Update persona
 router.put('/:id', async (req: Request, res: Response) => {
-  const supabase = getSupabaseClient();
   try {
+    const supabase = getSupabaseClient();
     const { id } = req.params;
     const updates = req.body;
     
@@ -140,8 +140,8 @@ router.put('/:id', async (req: Request, res: Response) => {
 
 // DELETE /api/personas/:id - Delete persona
 router.delete('/:id', async (req: Request, res: Response) => {
-  const supabase = getSupabaseClient();
   try {
+    const supabase = getSupabaseClient();
     const { id } = req.params;
     
     const { error } = await supabase

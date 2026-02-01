@@ -3,11 +3,9 @@ import getSupabaseClient from '../../supabaseClient.js';
 
 const router = express.Router({ mergeParams: true });
 
-// 初始化 Supabase Client
-const supabase = getSupabaseClient();
-
 router.post('/:id/complete', async (req: Request, res: Response): Promise<void> => {
   try {
+    const supabase = getSupabaseClient();
     const { id } = req.params;
     const { post_url } = req.body ?? {};
 

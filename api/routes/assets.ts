@@ -7,18 +7,20 @@ import { v4 as uuidv4 } from 'uuid';
 import sharp from 'sharp';
 
 const router = express.Router();
-const supabase = getSupabaseClient();
 
 // Configure Multer for file uploads
-const uploadDir = path.join(process.cwd(), 'uploads/assets/images');
-const thumbnailDir = path.join(process.cwd(), 'uploads/assets/thumbnails');
+const fsRoot = process.env.VERCEL ? '/tmp' : process.cwd();
+const uploadDir = path.join(fsRoot, 'uploads/assets/images');
+const thumbnailDir = path.join(fsRoot, 'uploads/assets/thumbnails');
 
-// Ensure directories exist
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir, { recursive: true });
-}
-if (!fs.existsSync(thumbnailDir)) {
-  fs.mkdirSync(thumbnailDir, { recursive: true });
+try {
+  if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir, { recursive: true });
+  }
+  if (!fs.existsSync(thumbnailDir)) {
+    fs.mkdirSync(thumbnailDir, { recursive: true });
+  }
+} catch {
 }
 
 const storage = multer.diskStorage({
@@ -49,8 +51,8 @@ const upload = multer({
 
 // GET /api/assets - Get assets with filtering
 router.get('/', async (req: Request, res: Response) => {
-  const supabase = getSupabaseClient();
   try {
+    const supabase = getSupabaseClient();
     // Disable caching
     res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
     res.setHeader('Pragma', 'no-cache');
@@ -94,8 +96,8 @@ router.get('/', async (req: Request, res: Response) => {
 
 // POST /api/assets/upload - Upload images
 router.post('/upload', upload.array('files', 10), async (req: Request, res: Response): Promise<void> => {
-  const supabase = getSupabaseClient();
   try {
+    const supabase = getSupabaseClient();
     const files = req.files as Express.Multer.File[];
     const { title, description, category, visibility, owner_id } = req.body;
 
@@ -182,8 +184,8 @@ router.post('/upload', upload.array('files', 10), async (req: Request, res: Resp
 
 // PUT /api/assets/:id/visibility - Update visibility
 router.put('/:id/visibility', async (req: Request, res: Response) => {
-  const supabase = getSupabaseClient();
   try {
+    const supabase = getSupabaseClient();
     const { id } = req.params;
     const { visibility } = req.body;
 
@@ -210,6 +212,7 @@ router.put('/:id/visibility', async (req: Request, res: Response) => {
 // PUT /api/assets/:id - General Update (including persona_id)
 router.put('/:id', async (req: Request, res: Response) => {
   try {
+    const supabase = getSupabaseClient();
     const { id } = req.params;
     const updates = req.body; // e.g., { persona_id: 'uuid', title: 'new title' }
 
@@ -233,6 +236,7 @@ router.put('/:id', async (req: Request, res: Response) => {
 // DELETE /api/assets/:id - 刪除素材
 router.delete('/:id', async (req: Request, res: Response) => {
   try {
+    const supabase = getSupabaseClient();
     const { id } = req.params;
     
     // 檢查是否有正在使用此素材的未完成任務
@@ -256,8 +260,8 @@ router.delete('/:id', async (req: Request, res: Response) => {
 
 // DELETE /api/assets - 批量刪除
 router.delete('/', async (req: Request, res: Response) => {
-  const supabase = getSupabaseClient();
   try {
+    const supabase = getSupabaseClient();
     const { ids } = req.body; // { ids: ['uuid1', 'uuid2'] }
     
     if (!ids || !Array.isArray(ids) || ids.length === 0) {

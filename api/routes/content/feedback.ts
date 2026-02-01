@@ -4,8 +4,6 @@ import getSupabaseClient from '../../supabaseClient.js';
 
 const router = express.Router();
 
-const supabase = getSupabaseClient();
-
 const getOpenAIClient = () => {
   return new OpenAI({
     apiKey: process.env.OPENAI_API_KEY || 'sk-mock-key-for-testing'
@@ -16,6 +14,7 @@ const getOpenAIClient = () => {
 // Analyze difference between original and final content
 router.post('/:id/feedback', async (req: Request, res: Response): Promise<void> => {
   try {
+    const supabase = getSupabaseClient();
     const openai = getOpenAIClient();
     const { id } = req.params;
     const { final_content } = req.body;

@@ -6,8 +6,8 @@ const router = Router();
 
 // Get my leaves
 router.get('/my-leaves', async (req, res) => {
-  const supabase = getSupabaseClient();
   try {
+    const supabase = getSupabaseClient();
     const { userId } = req.query; // Assuming userId is passed or we get it from auth middleware
     // For this project, it seems auth is handled or we pass user_id.
     // Let's check how other routes handle auth.
@@ -38,6 +38,7 @@ router.get('/my-leaves', async (req, res) => {
 router.post('/', async (req, res) => {
   console.log('Received leave application request:', req.body);
   try {
+    const supabase = getSupabaseClient();
     const { user_id, leave_type, reason, dates } = req.body;
     // Legacy support or fallback if needed, but we prefer 'dates' array now
     let { start_date, end_date, total_days } = req.body;
@@ -88,7 +89,6 @@ router.post('/', async (req, res) => {
     // 1. Check conflicts for ALL ranges
     // We can do this by checking if ANY of the ranges overlap with existing leaves
     // Optimization: fetch all active leaves for this user first
-    const supabase = getSupabaseClient();
     const { data: existingLeaves, error: fetchError } = await supabase
         .from('leave_applications')
         .select('start_date, end_date')
@@ -161,8 +161,8 @@ router.post('/', async (req, res) => {
 
 // Get pending leaves (Manager)
 router.get('/pending', async (req, res) => {
-  const supabase = getSupabaseClient();
   try {
+    const supabase = getSupabaseClient();
     // Ideally check if user is manager/admin
     const { data, error } = await supabase
       .from('leave_applications')
@@ -187,8 +187,8 @@ router.get('/pending', async (req, res) => {
 
 // Review leave (Approve/Reject)
 router.put('/:id/review', async (req, res) => {
-  const supabase = getSupabaseClient();
   try {
+    const supabase = getSupabaseClient();
     const { id } = req.params;
     const { status, approved_by, rejection_reason } = req.body;
 
@@ -218,8 +218,8 @@ router.put('/:id/review', async (req, res) => {
 
 // Get all leaves (Status Board)
 router.get('/board', async (req, res) => {
-  const supabase = getSupabaseClient();
   try {
+    const supabase = getSupabaseClient();
     const { date, startDate, endDate, department_id, name } = req.query;
     
     let query = supabase

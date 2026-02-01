@@ -6,8 +6,8 @@ const router = express.Router();
 
 // 取得爬蟲狀態與日誌
 router.get('/status', async (req: Request, res: Response) => {
-  const supabase = getSupabaseClient();
   try {
+    const supabase = getSupabaseClient();
     // 1. 取得所有 Feed 狀態
     const { data: feeds } = await supabase
       .from('rss_feeds')
@@ -63,8 +63,8 @@ router.post('/feeds', async (req: Request, res: Response) => {
 
 // 更新 Feed
 router.put('/feeds/:id', async (req: Request, res: Response) => {
-  const supabase = getSupabaseClient();
   try {
+    const supabase = getSupabaseClient();
     const { id } = req.params;
     const { name, url, category, is_active } = req.body;
     
@@ -91,8 +91,8 @@ router.put('/feeds/:id', async (req: Request, res: Response) => {
 
 // 刪除 Feed
 router.delete('/feeds/:id', async (req: Request, res: Response) => {
-  const supabase = getSupabaseClient();
   try {
+    const supabase = getSupabaseClient();
     const { id } = req.params;
     
     // 先刪除相關 logs (如果有 foreign key constraint 未設 cascade)

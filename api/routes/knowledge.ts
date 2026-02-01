@@ -5,8 +5,8 @@ const router = express.Router();
 
 // GET all phrases
 router.get('/', async (req, res) => {
-  const supabase = getSupabaseClient();
   try {
+    const supabase = getSupabaseClient();
     const { data, error } = await supabase
       .from('knowledge_base')
       .select('*')
@@ -22,8 +22,8 @@ router.get('/', async (req, res) => {
 
 // POST create phrase
 router.post('/', async (req, res) => {
-  const supabase = getSupabaseClient();
   try {
+    const supabase = getSupabaseClient();
     const { category, content, tags } = req.body;
     
     if (!category || !content) {
@@ -46,8 +46,8 @@ router.post('/', async (req, res) => {
 
 // PUT update phrase
 router.put('/:id', async (req, res) => {
-  const supabase = getSupabaseClient();
   try {
+    const supabase = getSupabaseClient();
     const { id } = req.params;
     const { category, content, tags } = req.body;
 
@@ -68,8 +68,8 @@ router.put('/:id', async (req, res) => {
 
 // DELETE phrase
 router.delete('/:id', async (req, res) => {
-  const supabase = getSupabaseClient();
   try {
+    const supabase = getSupabaseClient();
     const { id } = req.params;
 
     const { error } = await supabase

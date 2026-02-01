@@ -2,11 +2,11 @@ import express, { type Request, type Response } from 'express';
 import getSupabaseClient from '../supabaseClient.js';
 
 const router = express.Router();
-const supabase = getSupabaseClient();
 
 // GET /api/workbench/my_personas
 router.get('/my_personas', async (req: Request, res: Response) => {
   try {
+    const supabase = getSupabaseClient();
     // Mock data for now or fetch from DB
     // In a real implementation, we would fetch personas assigned to the current user
     const { data: personas, error } = await supabase
@@ -32,6 +32,7 @@ router.get('/my_personas', async (req: Request, res: Response) => {
 router.get('/:id', async (req: Request, res: Response) => {
   const { id } = req.params;
   try {
+    const supabase = getSupabaseClient();
     const { data: persona, error } = await supabase
       .from('personas')
       .select('*')

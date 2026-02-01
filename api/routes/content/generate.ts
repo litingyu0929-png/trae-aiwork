@@ -4,11 +4,9 @@ import getSupabaseClient from '../../supabaseClient.js';
 
 const router = express.Router();
 
-// 初始化 Supabase Client
-const supabase = getSupabaseClient();
-
 router.post('/generate', async (req: Request, res: Response): Promise<void> => {
   try {
+    const supabase = getSupabaseClient();
     // 支援直接傳入 persona 物件 (For ContentFactory with dummy accounts)
     // 優先使用 persona 物件，如果沒有才嘗試用 persona_id 去資料庫查
     let { persona, persona_id, account_id, platform, asset_id, daily_task_id, idea_input, assets, assetDescription, assetType } = req.body;

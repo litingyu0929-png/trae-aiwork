@@ -3,11 +3,10 @@ import getSupabaseClient from '../../supabaseClient.js';
 
 const router = express.Router({ mergeParams: true });
 
-const supabase = getSupabaseClient();
-
 // PUT /api/work_tasks/:id
 router.put('/:id', async (req: Request, res: Response): Promise<void> => {
   try {
+    const supabase = getSupabaseClient();
     const { id } = req.params;
     const updates = req.body;
 

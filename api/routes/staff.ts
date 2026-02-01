@@ -6,8 +6,8 @@ const router = express.Router();
 
 // GET /api/team/mine - Get assignments for the current user
 router.get('/mine', async (req: Request, res: Response) => {
-  const supabase = getSupabaseClient();
   try {
+    const supabase = getSupabaseClient();
     const { user_id } = req.query; // Assuming passed from frontend or middleware
     
     if (!user_id) {
@@ -82,8 +82,8 @@ router.get('/mine', async (req: Request, res: Response) => {
 
 // GET /api/team - List all staff (Admin/Leader only)
 router.get('/', async (req: Request, res: Response) => {
-  const supabase = getSupabaseClient();
   try {
+    const supabase = getSupabaseClient();
     const { role } = req.query; // Filter by role if needed
 
     let query = supabase
@@ -117,8 +117,8 @@ router.get('/', async (req: Request, res: Response) => {
 
 // POST /api/team/assign - Assign persona to staff
 router.post('/assign', async (req: Request, res: Response) => {
-  const supabase = getSupabaseClient();
   try {
+    const supabase = getSupabaseClient();
     const { staff_id, persona_ids, assigned_by } = req.body;
 
     if (!staff_id || !Array.isArray(persona_ids)) {
@@ -203,8 +203,8 @@ router.post('/assign', async (req: Request, res: Response) => {
 
 // PUT /api/team/:id - Update staff details (role, type, status)
 router.put('/:id', async (req: Request, res: Response) => {
-  const supabase = getSupabaseClient();
   try {
+    const supabase = getSupabaseClient();
     const { id } = req.params;
     const { role, staff_type, full_name } = req.body;
 
@@ -230,8 +230,8 @@ router.put('/:id', async (req: Request, res: Response) => {
 
 // PUT /api/team/:id/reset-password - Reset staff password
 router.put('/:id/reset-password', async (req: Request, res: Response) => {
-  const supabase = getSupabaseClient();
   try {
+    const supabase = getSupabaseClient();
     const { id } = req.params;
     const { password } = req.body;
 
@@ -253,8 +253,8 @@ router.put('/:id/reset-password', async (req: Request, res: Response) => {
 
 // DELETE /api/team/:id - Delete staff
 router.delete('/:id', async (req: Request, res: Response) => {
-  const supabase = getSupabaseClient();
   try {
+    const supabase = getSupabaseClient();
     const { id } = req.params;
 
     // 1. Unassign accounts
@@ -304,8 +304,8 @@ router.delete('/:id', async (req: Request, res: Response) => {
 
 // POST /api/team/proxy-bind - Log and validate proxy binding
 router.post('/proxy-bind', async (req: Request, res: Response) => {
-  const supabase = getSupabaseClient();
   try {
+    const supabase = getSupabaseClient();
     const { proxy_user_id, target_user_id } = req.body;
 
     if (!proxy_user_id || !target_user_id) {

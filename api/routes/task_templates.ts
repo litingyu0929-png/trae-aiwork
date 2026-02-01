@@ -3,11 +3,11 @@ import getSupabaseClient from '../supabaseClient.js';
 import { authenticateToken } from '../middlewares/authMiddleware.js';
 
 const router = express.Router();
-const supabase = getSupabaseClient();
 
 // Get all templates (Public access for now, or add auth if needed)
 router.get('/', async (req: Request, res: Response) => {
   try {
+    const supabase = getSupabaseClient();
     const { data, error } = await supabase
       .from('task_templates')
       .select('*, personas(name)')
@@ -23,6 +23,7 @@ router.get('/', async (req: Request, res: Response) => {
 // Create new template
 router.post('/', async (req: Request, res: Response) => {
   try {
+    const supabase = getSupabaseClient();
     const { task_type, time_slot, priority, persona_id, rule, frequency, enabled } = req.body;
     
     const { data, error } = await supabase
@@ -49,6 +50,7 @@ router.post('/', async (req: Request, res: Response) => {
 // Update template
 router.put('/:id', async (req: Request, res: Response) => {
   try {
+    const supabase = getSupabaseClient();
     const { id } = req.params;
     const updates = req.body;
     
@@ -69,6 +71,7 @@ router.put('/:id', async (req: Request, res: Response) => {
 // Delete template
 router.delete('/:id', async (req: Request, res: Response) => {
   try {
+    const supabase = getSupabaseClient();
     const { id } = req.params;
     
     const { error } = await supabase

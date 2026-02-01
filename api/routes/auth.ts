@@ -12,8 +12,8 @@ const router = Router();
  * POST /api/auth/register
  */
 router.post('/register', async (req: Request, res: Response): Promise<void> => {
-  const supabase = getSupabaseClient();
   try {
+    const supabase = getSupabaseClient();
     const { email, password, full_name, role } = req.body;
 
     // 1. Create user in Supabase Auth

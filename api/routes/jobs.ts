@@ -7,12 +7,12 @@ const router = express.Router();
 
 // ===== 主函數：生成今日任務 =====
 export async function generateDailyTasks() {
-  const supabase = getSupabaseClient();
   const targetDate = new Date().toISOString().split('T')[0];
   
   console.log(`🚀 [${new Date().toISOString()}] 開始生成 ${targetDate} 的任務...`);
   
   try {
+    const supabase = getSupabaseClient();
     // 1. 讀取所有啟用的模板
     const { data: templates, error: templatesError } = await supabase
       .from('task_templates')

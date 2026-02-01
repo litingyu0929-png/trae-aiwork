@@ -6,8 +6,8 @@ const router = Router();
 
 // Get my notifications
 router.get('/', async (req, res) => {
-  const supabase = getSupabaseClient();
   try {
+    const supabase = getSupabaseClient();
     const { userId } = req.query;
     if (!userId) {
         return res.status(400).json({ success: false, error: 'User ID is required' });
@@ -35,8 +35,8 @@ router.get('/', async (req, res) => {
 
 // Mark as read
 router.put('/:id/read', async (req, res) => {
-  const supabase = getSupabaseClient();
   try {
+    const supabase = getSupabaseClient();
     const { id } = req.params;
     const { data, error } = await supabase
       .from('notifications')
@@ -54,8 +54,8 @@ router.put('/:id/read', async (req, res) => {
 
 // Mark all as read
 router.put('/read-all', async (req, res) => {
-    const supabase = getSupabaseClient();
     try {
+      const supabase = getSupabaseClient();
       const { userId } = req.body;
       if (!userId) {
           return res.status(400).json({ success: false, error: 'User ID is required' });
