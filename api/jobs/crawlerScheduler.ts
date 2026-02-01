@@ -1,5 +1,5 @@
 import cron from 'node-cron';
-import { CrawlerEngine } from '../services/crawlerEngine.js';
+import { CrawlerEngine } from '../services/crawlerEngine';
 
 export function startCrawlerCron() {
   // 每 24 小時執行一次 (0 0 * * *)

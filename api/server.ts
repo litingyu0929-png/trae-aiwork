@@ -2,9 +2,9 @@
  * local server entry file, for local development
  */
 import 'dotenv/config';
-import app from './app.js';
-import { startDailyTasksCron } from './routes/jobs.js';
-import { startCrawlerCron } from './jobs/crawlerScheduler.js';
+import app from './app';
+import { startDailyTasksCron } from './routes/jobs';
+import { startCrawlerCron } from './jobs/crawlerScheduler';
 
 /**
  * start server with port

@@ -1,7 +1,7 @@
 import Parser from 'rss-parser';
-import { detectAssetType } from '../../src/lib/assetTypeMapping.js';
-import { translateContent } from './AIService.js';
-import getSupabaseClient from '../supabaseClient.js';
+import { detectAssetType } from '../../src/lib/assetTypeMapping';
+import { translateContent } from './AIService';
+import getSupabaseClient from '../supabaseClient';
 
 const parser = new Parser();
 

@@ -1,5 +1,5 @@
 import express, { type Request, type Response } from 'express';
-import getSupabaseClient from '../supabaseClient.js';
+import getSupabaseClient from '../supabaseClient';
 import cron from 'node-cron';
 
 const router = express.Router();
@@ -177,7 +177,7 @@ router.post('/init_daily_tasks', async (req: Request, res: Response) => {
   }
 });
 
-import { CrawlerEngine } from '../services/crawlerEngine.js';
+import { CrawlerEngine } from '../services/crawlerEngine';
 
 // ... 略 ...
 

@@ -1,6 +1,6 @@
 import express, { type Request, type Response } from 'express';
-import { generatePersonaContent } from '../../services/AIService.js';
-import getSupabaseClient from '../../supabaseClient.js';
+import { generatePersonaContent } from '../../services/AIService';
+import getSupabaseClient from '../../supabaseClient';
 
 const router = express.Router();
 

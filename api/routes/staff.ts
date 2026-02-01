@@ -1,6 +1,6 @@
 import express, { type Request, type Response } from 'express';
-import { authenticateToken } from '../middlewares/authMiddleware.js';
-import getSupabaseClient from '../supabaseClient.js';
+import { authenticateToken } from '../middlewares/authMiddleware';
+import getSupabaseClient from '../supabaseClient';
 
 const router = express.Router();
 

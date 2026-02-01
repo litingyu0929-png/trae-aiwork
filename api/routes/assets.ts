@@ -1,5 +1,5 @@
 import express, { type Request, type Response } from 'express';
-import getSupabaseClient from '../supabaseClient.js';
+import getSupabaseClient from '../supabaseClient';
 import multer from 'multer';
 import path from 'path';
 import fs from 'fs';

@@ -1,6 +1,6 @@
 import express, { type Request, type Response } from 'express';
-import { CrawlerEngine } from '../services/crawlerEngine.js';
-import getSupabaseClient from '../supabaseClient.js';
+import { CrawlerEngine } from '../services/crawlerEngine';
+import getSupabaseClient from '../supabaseClient';
 
 const router = express.Router();
 
