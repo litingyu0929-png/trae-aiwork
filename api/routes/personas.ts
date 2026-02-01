@@ -91,6 +91,7 @@ router.post('/', async (req: Request, res: Response) => {
       gender 
     } = req.body;
     
+    const supabase = getSupabaseClient();
     const { data, error } = await supabase
       .from('personas')
       .insert([{
